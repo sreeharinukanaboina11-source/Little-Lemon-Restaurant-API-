@@ -1,0 +1,222 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-10-16T14:40:00.000Z",
+  "__export_source": "insomnia.desktop.app:v8.6.1",
+  "resources": [
+    {
+      "_id": "wrk_littlelemon",
+      "_type": "workspace",
+      "name": "Little Lemon Restaurant API",
+      "description": "Coursera Backend Developer Capstone - Complete REST API Collection"
+    },
+    {
+      "_id": "env_littlelemon",
+      "_type": "environment",
+      "parentId": "wrk_littlelemon",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://127.0.0.1:8000",
+        "token": ""
+      }
+    },
+    {
+      "_id": "req_register",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "1. User Registration",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/users/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"testcustomer1\",\n  \"password\": \"SecretPass123!\",\n  \"email\": \"customer1@example.com\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "2. Obtain Auth Token (Login)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api-token-auth/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"testcustomer1\",\n  \"password\": \"SecretPass123!\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_home_html",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "3. Static HTML Homepage",
+      "method": "GET",
+      "url": "{{ _.base_url }}/",
+      "headers": []
+    },
+    {
+      "_id": "req_menu_list",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "4. Menu Items - List / Search / Filter",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/menu-items/?search=Greek&ordering=-price",
+      "headers": []
+    },
+    {
+      "_id": "req_menu_create",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "5. Menu Items - Create (Manager / Admin)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/menu-items/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Mediterranean Pasta\",\n  \"price\": \"18.50\",\n  \"category\": 1,\n  \"featured\": false\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_booking_list",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "6. Table Bookings - List (Authenticated)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/bookings/",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_booking_create",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "7. Table Bookings - Create Reservation",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/bookings/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Alice Cooper\",\n  \"no_of_guests\": 4,\n  \"booking_date\": \"2026-12-25\",\n  \"booking_time\": \"19:30:00\",\n  \"table_number\": 3,\n  \"special_requests\": \"Quiet booth please\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_booking_conflict",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "8. Table Bookings - Overlap Conflict (Expects 400)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/bookings/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Bob Miller\",\n  \"no_of_guests\": 2,\n  \"booking_date\": \"2026-12-25\",\n  \"booking_time\": \"19:30:00\",\n  \"table_number\": 3\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_cart_add",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "9. Cart - Add Menu Item",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/cart/menu-items/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"menuitem\": 1,\n  \"quantity\": 2\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_cart_view",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "10. Cart - View Items",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/cart/menu-items/",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_order_create",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "11. Orders - Checkout (Create Order from Cart)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/orders/",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_order_list",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "12. Orders - List Orders",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/orders/",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ]
+    }
+  ]
+}

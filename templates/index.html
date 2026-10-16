@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Little Lemon Restaurant Management API - Coursera Backend Developer Capstone Project with Django REST Framework, MySQL, Authentication, Menu, and Table Booking.">
+  <title>Little Lemon Restaurant - Mediterranean Cuisine & Management API</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="/" class="logo-wrapper" id="nav-brand">
+        <div class="logo-icon">&#127819;</div>
+        <div class="logo-title">Little Lemon</div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/" id="nav-home">Home</a></li>
+          <li><a href="#about" id="nav-about">About</a></li>
+          <li><a href="/api/menu-items/" id="nav-menu">Menu API</a></li>
+          <li><a href="/api/bookings/" id="nav-bookings">Bookings API</a></li>
+          <li><a href="/api/orders/" id="nav-orders">Orders API</a></li>
+          <li><a href="/admin/" id="nav-admin">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div>
+        <h1 id="hero-title">Little Lemon</h1>
+        <h2 id="hero-subtitle">Chicago &bull; Mediterranean Kitchen &amp; Bar</h2>
+        <p>
+          Welcome to Little Lemon. We are a charming neighborhood bistro that serves simple food and classic cocktails in a lively but casual environment. Our backend API powers real-time table reservations, menu management, customer ordering, and role-based staff operations.
+        </p>
+        <a href="/api/menu-items/" class="btn-primary" id="cta-explore-menu">Explore Menu API</a>
+        &nbsp;&nbsp;
+        <a href="/api/bookings/" class="btn-primary" style="background-color: var(--secondary-orange); color: white;" id="cta-book-table">Table Bookings API</a>
+      </div>
+      <div class="hero-card">
+        <h3>Backend API Highlights</h3>
+        <ul>
+          <li><span>MySQL &bull; Django 5 &bull; DRF</span></li>
+          <li>Token Authentication: <span>/api-token-auth/</span></li>
+          <li>User Registration: <span>/api/users/</span></li>
+          <li>Menu &amp; Categories: <span>/api/menu-items/</span></li>
+          <li>Table Reservations: <span>/api/bookings/</span></li>
+          <li>Cart &amp; Orders: <span>/api/orders/</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <h2 class="section-title">Core Management Endpoints</h2>
+
+    <div class="cards-grid">
+      <!-- Card 1: Menu Items -->
+      <div class="card" id="card-menu">
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Menu &amp; Categories</h3>
+            <span class="card-badge">Public / Manager</span>
+          </div>
+          <p class="card-desc">Browse dishes, filter by category or slug, search by title, and sort by price. Managers can create, update, and remove items.</p>
+          <div class="card-code">GET /api/menu-items/<br>GET /api/categories/<br>POST /api/menu-items/</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Table Bookings -->
+      <div class="card" id="card-booking">
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Table Reservations</h3>
+            <span class="card-badge">Authenticated</span>
+          </div>
+          <p class="card-desc">Reserve tables with validation against overlapping reservations for the same table and time slot. Customers manage their own bookings; managers can view all.</p>
+          <div class="card-code">GET /api/bookings/<br>POST /api/bookings/<br>GET /api/bookings/{id}/</div>
+        </div>
+      </div>
+
+      <!-- Card 3: Orders & Cart -->
+      <div class="card" id="card-orders">
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Cart &amp; Order Pipeline</h3>
+            <span class="card-badge">Role-Based</span>
+          </div>
+          <p class="card-desc">Customers add items to cart and convert to orders. Managers assign delivery crew members. Delivery crew view and fulfill deliveries.</p>
+          <div class="card-code">GET /api/cart/menu-items/<br>POST /api/orders/<br>PATCH /api/orders/{id}/</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <h2>About Little Lemon</h2>
+      <p>
+        Based in Chicago, Illinois, Little Lemon is run by two Italian brothers, Mario and Adrian, who came to the United States to pursue their shared passion of cooking. Mario focuses on the authentic Mediterranean recipes learned from their grandmother, while Adrian leads the restaurant's contemporary dining experience and digital ordering technology.
+      </p>
+      <br>
+      <p>
+        This Django REST Framework web application serves as the production-ready backend supporting online table booking, dynamic menu display, order management, and secure role-based staff operations with MySQL.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>Little Lemon</h4>
+        <p>123 Main Street<br>Chicago, Illinois 60601<br>Tel: (312) 555-0199</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="/api/menu-items/">Menu Items</a></li>
+          <li><a href="/api/bookings/">Table Bookings</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Staff &amp; Administration</h4>
+        <ul>
+          <li><a href="/admin/">Django Administration</a></li>
+          <li><a href="/api-token-auth/">Token Authentication</a></li>
+          <li><a href="/api/groups/manager/users/">Manager Group</a></li>
+          <li><a href="/api/groups/delivery-crew/users/">Delivery Crew Group</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 Little Lemon Restaurant &bull; Coursera Backend Developer Capstone Project
+    </div>
+  </footer>
+
+</body>
+</html>
